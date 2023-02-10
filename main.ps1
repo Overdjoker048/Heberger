@@ -1,10 +1,10 @@
 cls
-Remove-NetFirewallRule -DisplayName 'Host'
-try{
-    Set-ExecutionPolicy Undefined
+$perm = Get-ExecutionPolicy
+if ($perm -eq "Unrestricted"){
+    Remove-NetFirewallRule -DisplayName 'Host'
     cls
 
-    write-host @"
+    @"
      **      **                    **  
     /**     /**                   /**  
     /**     /**  ******   ****** ******
@@ -33,5 +33,4 @@ try{
             }else {"[Server] The port must be between 1000 and 65535."}
         }catch{"[Server] The chosen port is not valid."}
     }else{"[Server] The path you entered does not exist."}
-}catch{cls
-"[Server] You don't have permission for launch me."}
+}else{"[Server] You don't have permission for launch me."}
